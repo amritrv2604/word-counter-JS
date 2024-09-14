@@ -16,7 +16,7 @@
 
 ## Screenshots
 
-![word counter]()
+![word counter](https://github.com/amritrv2604/word-counter-JS/blob/main/assets/word-counter.png?raw=true)
 - This is how the interface looks like.
 
 
@@ -24,15 +24,15 @@
 
 To deploy this project in your local system, run:
 ```bash
-gh repo clone amritrv2604/digitalClock
+gh repo clone amritrv2604/word-counter-JS
 ```
 
 
 ## Technologies Used
 
-- HTML: Defines the structure of the clock.
-- CSS: Styles the appearance of the clock and background.
-- JavaScript: Provides the logic to update the clock's display in real time.
+- HTML: Defines the structure of the word counter.
+- CSS: Styles the appearance of the tool.
+- JavaScript: Provides the logic for word counting, analysis, and display.
 
 
 ## Contributing
