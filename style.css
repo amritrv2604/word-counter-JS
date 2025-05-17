@@ -88,6 +88,19 @@ textarea::selection {
   color: white;
 }
 
+/* Ad Container Styles */
+.ad-container {
+  margin: 15px 0;
+  text-align: center;
+  min-height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255,255,255,0.1);
+  border-radius: 5px;
+  padding: 5px;
+}
+
 /* Button Container */
 .button-container {
   display: flex;
@@ -326,6 +339,12 @@ textarea::selection {
     font-size: 1.2rem;
     border-radius: 7px;
     padding: 15px;
+  }
+
+  .ad-container {
+    margin: 10px 0;
+    width: 100%;
+    overflow: hidden;
   }
 
   .output.row {
