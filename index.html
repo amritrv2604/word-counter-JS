@@ -1,31 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Word Counter</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="container">
-      <h1>Word Counter</h1>
-      <textarea placeholder="Enter your text here..."></textarea>
-      <div class="output row">
-        <div>Characters: <span id="characterCount">0</span></div>
-        <div>Words: <span id="wordCount">0</span></div>
-      </div>
-      <div class="output row">
-        <div>Sentences: <span id="sentenceCount">0</span></div>
-        <div>Paragraphs: <span id="paragraphCount">0</span></div>
-      </div>
-      <div class="output row">
-        <div>Reading Time: <span id="readingTime">0</span></div>
-      </div>
-      <div class="keywords">
-        Top keywords:
-        <ul id="topKeywords"></ul>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Word Counter</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+  <div class="container">
+    <!-- heading -->
+    <h1>Word Counter</h1>
+
+    <!-- textarea -->
+    <textarea placeholder="Enter your text here..."></textarea>
+
+    <!-- buttons -->
+    <div class="button-container">
+      <button id="copyBtn" class="action-button">📋 Copy Text</button>
+      <button id="clearBtn" class="action-button">❌ Clear Text</button>
+    </div>
+
+    <div class="output row">
+      <div>Characters: <span id="characterCount">0</span></div>
+      <div>Words: <span id="wordCount">0</span></div>
+    </div>
+    <div class="output row">
+      <div>Sentences: <span id="sentenceCount">0</span></div>
+      <div>Paragraphs: <span id="paragraphCount">0</span></div>
+    </div>
+    <div class="output row">
+      <div>Reading Time: <span id="readingTime">0</span></div>
+    </div>
+    <div class="keywords">
+      Top keywords:
+      <ul id="topKeywords"></ul>
+    </div>
+  </div>
+
+  <!-- footer -->
+  <div class="footer">
+    <p>Made with ❤️ by <a href="https://github.com/amritrv2604" target="_blank">ARV</a></p>
+  </div>
+
+  <!-- Custom Confirmation Dialog -->
+  <div id="customConfirm" class="confirm-dialog">
+    <div class="confirm-content">
+      <h3>Clear All Text?</h3>
+      <p>Are you sure you want to clear everything?</p>
+      <div class="confirm-buttons">
+        <button id="confirmCancel">Cancel</button>
+        <button id="confirmClear">Clear</button>
       </div>
     </div>
-    <script src="script.js"></script>
-  </body>
+  </div>
+
+</body>
+<script src="script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/wordcount@2.0.0/wordcount.min.js"></script>
+
 </html>
