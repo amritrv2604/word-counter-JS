@@ -25,11 +25,16 @@ b {
 /* main app styles */
 
 body {
-  width: 700px;
-  margin: 0 auto;
+  width: 95%;
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 0 10px;
   background-color: #4b9cd3;
   font-family: "Source Sans Pro", sans-serif;
   color: #111;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .container {
@@ -37,10 +42,13 @@ body {
   padding: 15px;
   background-color: #fbab7e;
   background-image: linear-gradient(62deg, #fbab7e 0%, #f7ce68 100%);
-
   border-radius: 12px;
   -webkit-box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
+
+  margin: 20px 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 h1 {
@@ -48,6 +56,9 @@ h1 {
   font-weight: 900;
   text-align: center;
   margin: 1% 0 3%;
+
+  font-size: 2rem;
+  margin: 10px 0 20px;
 }
 
 textarea {
@@ -59,6 +70,9 @@ textarea {
   font-size: 1rem;
   resize: none;
   line-height: 1.5rem;
+
+  height: 200px;
+  font-size: 16px;
 }
 
 textarea:hover {
@@ -67,6 +81,49 @@ textarea:hover {
 
 textarea:focus {
   border-color: #4d90fe;
+}
+
+textarea::selection {
+  background: #4b9cd3;
+  color: white;
+}
+
+/* Button Container */
+.button-container {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+  width: 100%;
+}
+
+.action-button {
+  flex: 1;
+  /* Makes buttons equal width */
+  padding: 10px;
+  background: #4b9cd3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  width: 100%;
+  padding: 12px;
+}
+
+.action-button:hover {
+  background: #3a7ba8;
+}
+
+.action-button:active {
+  transform: scale(0.98);
+}
+
+.action-button:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 
 .output.row {
@@ -111,6 +168,112 @@ textarea:focus {
   margin: 1%;
 }
 
+.footer {
+  margin-top: 30px;
+  text-align: center;
+  padding: 15px 0;
+  color: white;
+  font-size: 1rem;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+.footer a {
+  color: #f7ce68;
+  /* Matching your gradient */
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.footer a:hover {
+  color: #fbab7e;
+  /* Matching your gradient's start color */
+  text-decoration: underline;
+}
+
+.footer p {
+  margin: 0;
+  padding: 5px;
+}
+
+.footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: 40px;
+}
+
+/* Custom Confirmation Dialog Styles */
+.confirm-dialog {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.confirm-content {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s;
+}
+
+.confirm-content h3 {
+  margin-top: 0;
+  color: #4b9cd3;
+}
+
+.confirm-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.confirm-buttons button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#confirmCancel {
+  background: #f1f1f1;
+}
+
+#confirmCancel:hover {
+  background: #e0e0e0;
+}
+
+#confirmClear {
+  background: #fbab7e;
+  color: white;
+}
+
+#confirmClear:hover {
+  background: #f78c5a;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* 
   ** Making it responsive
   */
@@ -119,58 +282,119 @@ textarea:focus {
   body {
     width: 600px;
   }
+
   .output.row {
     font-size: 1.2rem;
   }
+
   .output.row span {
     font-size: 1.3rem;
   }
+
   .keywords ul {
     font-size: 1.2rem;
   }
 }
 
-@media (max-width: 600px) {
-  /* rewriting old styles */
+/* mobile */
+@media (max-width: 480px) {
   body {
     width: 95%;
   }
+
+  .container {
+    padding: 10px;
+    margin: 0;
+    background-color: #fbab7e;
+    background-image: linear-gradient(62deg, #fbab7e 0%, #f7ce68 100%);
+    border-radius: 12px;
+    -webkit-box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+    margin-top: 30%;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .container h1 {
+    font-size: 2.5rem;
+    margin: 10px 0 20px;
+  }
+
+  .container textarea {
+    height: 150px;
+    font-size: 1.2rem;
+    border-radius: 7px;
+    padding: 15px;
+  }
+
   .output.row {
     border: none;
     background-color: #fff;
   }
+
   .output.row div {
     display: block;
     width: 100%;
     padding: 10px 15px;
     margin: 2% auto;
     border: 1px solid #ddd;
-    font-size: 1.8rem;
+    font-size: 1.3rem;
     background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
   }
+
   .output.row span {
-    font-size: 2rem;
+    font-size: 1.3rem;
   }
+
   #readability {
     width: 100%;
     font-size: 1.6rem;
     font-weight: 400;
   }
+
   .keywords {
     margin: 10% auto;
   }
+
   .keywords ul {
     font-weight: 400;
     border: none;
-    font-size: 1.8rem;
+    font-size: 1.3rem;
     background-color: #f9f9f9;
     margin: 5% 0;
   }
+
   .keywords li {
     display: block;
     width: 100%;
     padding: 10px;
     margin: 2% auto;
     border: 1px solid #ddd;
+  }
+
+  .confirm-content {
+    width: 85%;
+    padding: 20px;
+  }
+
+  .confirm-buttons {
+    flex-direction: column;
+  }
+
+  .confirm-buttons button {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .button-container {
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .footer {
+    display: none;
   }
 }
