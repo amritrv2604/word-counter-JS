@@ -1,11 +1,3 @@
-/*
- ** User stories:
- ** - Shows number of characters, words, sentences, paragraphs - Done
- ** - Show reading time - Done
- ** - Show keyword count - Done
- ** - Above data should change/appear on every keypress - Done
- */
-
 "use strict";
 var input = document.querySelectorAll("textarea")[0],
   characterCount = document.querySelector("#characterCount"),
@@ -25,7 +17,6 @@ input.addEventListener("keyup", function () {
 
   // word count
   var words = input.value.match(/\b[-?(\w+)?]+\b/gi);
-  // console.log(words);
   if (words) {
     wordCount.innerHTML = words.length;
   } else {
@@ -42,14 +33,11 @@ input.addEventListener("keyup", function () {
   }
 
   if (words) {
-    // \n$ takes care of empty lines: lines with no characters, and only \n are not paragraphs
-    // and need to be replaced with empty string
     var paragraphs = input.value.replace(/\n$/gm, "").split(/\n/);
     paragraphCount.innerHTML = paragraphs.length;
   } else {
     paragraphCount.innerHTML = 0;
   }
-  // console.log(paragraphs);
 
   // reading time based on 275 words/minute
   if (words) {
@@ -738,13 +726,13 @@ input.addEventListener("keyup", function () {
       "z",
       "zero",
     ];
+
     for (var i = 0; i < words.length; i++) {
       // filtering out stop words and numbers
       if (stopWords.indexOf(words[i].toLowerCase()) === -1 && isNaN(words[i])) {
         nonStopWords.push(words[i].toLowerCase());
       }
     }
-    // console.log(nonStopWords);
 
     // forming an object with keywords and their count
     var keywords = {};
@@ -766,7 +754,6 @@ input.addEventListener("keyup", function () {
     sortedKeywords.sort(function (a, b) {
       return b[1] - a[1];
     });
-    // console.log(sortedKeywords);
 
     // displaying top 4 keywords and their count
     topKeywords.innerHTML = "";
@@ -784,4 +771,73 @@ input.addEventListener("keyup", function () {
   } else {
     keywordsDiv.style.display = "none";
   }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const copyBtn = document.getElementById("copyBtn");
+  const clearBtn = document.getElementById("clearBtn");
+  const input = document.querySelector("textarea");
+  // Function to update button states
+  function updateButtons() {
+    const hasText = input.value.trim().length > 0;
+    copyBtn.disabled = !hasText;
+    clearBtn.disabled = !hasText;
+  }
+
+  // Initial state
+  updateButtons();
+
+  // Text input listener
+  input.addEventListener("input", updateButtons);
+
+  // Clear button functionality
+  // Dialog elements
+  const customConfirm = document.getElementById("customConfirm");
+  const confirmCancel = document.getElementById("confirmCancel");
+  const confirmClear = document.getElementById("confirmClear");
+
+  // Clear button functionality with custom dialog
+  clearBtn.addEventListener("click", () => {
+    customConfirm.style.display = "flex";
+  });
+
+  confirmCancel.addEventListener("click", () => {
+    customConfirm.style.display = "none";
+  });
+
+  confirmClear.addEventListener("click", () => {
+    // Clear everything
+    input.value = "";
+    characterCount.textContent = "0";
+    wordCount.textContent = "0";
+    sentenceCount.textContent = "0";
+    paragraphCount.textContent = "0";
+    readingTime.textContent = "0s";
+    keywordsDiv.style.display = "none";
+    topKeywords.innerHTML = "";
+    updateButtons();
+    input.focus();
+
+    // Hide dialog
+    customConfirm.style.display = "none";
+  });
+
+  // Close dialog when clicking outside content
+  customConfirm.addEventListener("click", (e) => {
+    if (e.target === customConfirm) {
+      customConfirm.style.display = "none";
+    }
+  });
+
+  // Copy logic
+  copyBtn.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(input.value);
+      copyBtn.textContent = "✅ Copied!";
+      setTimeout(() => (copyBtn.textContent = "📋 Copy Text"), 2000);
+    } catch (err) {
+      console.error("Copy failed:", err);
+      copyBtn.textContent = "❌ Error";
+    }
+  });
 });
